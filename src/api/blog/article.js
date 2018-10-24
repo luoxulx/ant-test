@@ -44,6 +44,6 @@ export function deleteOne(id) {
   return request({
     url: '/article/destory',
     method: 'delete',
-    params: {id}
+    params: { id }
   })
 }

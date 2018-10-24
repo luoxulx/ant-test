@@ -50,7 +50,6 @@ const user = {
       const email = userInfo.email.trim()
       return new Promise((resolve, reject) => {
         loginByEmail(email, userInfo.password).then(response => {
-          console.log(response)
           const data = response.data
           commit('SET_TOKEN', data.dgo_token)
           setToken(response.data.dgo_token)
@@ -69,7 +68,6 @@ const user = {
             reject('error')
           }
           const data = response.data
-
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             commit('SET_ROLES', data.roles)
           } else {

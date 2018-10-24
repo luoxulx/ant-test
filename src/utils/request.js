@@ -18,7 +18,6 @@ service.interceptors.request.use(
       // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
       config.headers['Authorization'] = getToken()
     }
-    console.log(config)
     return config
   },
   error => {
@@ -31,10 +30,16 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   response => {
-    // var dgo_token = response.headers.authorization
-    // if (dgo_token) {
-    //   setToken(dgo_token)
-    // }
+    if (response.status === 401) {
+      Message({
+        message: response.data.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
+    if (response.data.dgo_token) {
+      setToken(response.data.dgo_token)
+    }
     return response
   },
   /**

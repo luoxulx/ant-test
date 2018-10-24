@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { fetchList, fetchPv, storeOne, updateOne, deleteOne } from '@/api/blog/article'
+import { articleList, fetchPv, storeOne, updateOne, deleteOne } from '@/api/blog/article'
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
@@ -212,14 +212,14 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      fetchList(this.listQuery).then(response => {
+      articleList(this.listQuery).then(response => {
+        console.log(response)
         this.list = response.data.items
         this.total = response.data.total
-
         // Just to simulate the time of the request
-        setTimeout(() => {
-          this.listLoading = false
-        }, 1.5 * 1000)
+        // setTimeout(() => {
+        //   this.listLoading = false
+        // }, 1.5 * 1000)
       })
     },
     handleFilter() {
